@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算器</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+    <div class="mb-2" v-for="(c, index) in calc" :key="c.id">
+        <div><input class="form-control"
+                    type="text"
+                    v-last-focus="index + 1 === calc.length"
+                    v-model="c.expression"
+                    @keyup.enter="handleCalcClick(c)"></div>
+        <div class="mt-2">{{ c.result }}</div>
+        <div class="mt-2"><button class="btn btn-danger" @click="handleCalcClick(c)">计算</button></div>
+    </div>
+
+    <div><button class="btn btn-primary" @click="addCalcItem">＋新增</button></div>
+    <div class="mt-4"><a href="https://mathjs.org/">https://mathjs.org</a></div>
+    <div class="mt-4"><a href="/">首页</a></div>
+</div>
+
+<script src="./math.js"></script>
+<script type="module">
+    import { createApp, ref } from './vue.esm-browser.prod.js';
+
+    math.config({
+        number: 'BigNumber',      // Default type of number:
+                                  // 'number' (default), 'BigNumber', or 'Fraction'
+        precision: 64,            // Number of significant digits for BigNumbers
+        relTol: 1e-60,
+        absTol: 1e-63,
+    });
+
+    createApp({
+        setup() {
+            let calcId = 0;
+            const calc = ref([]);
+            const addCalcItem = () => {
+                calc.value.push({
+                    id: calcId++,
+                    expression: '',
+                    result: '',
+                });
+            };
+
+            addCalcItem();
+
+            return {
+                calc,
+                addCalcItem,
+                handleCalcClick(c) {
+                    c.result = math.evaluate(
+                        c.expression
+                            .replaceAll('（', '(')
+                            .replaceAll('）', ')')
+                            .replaceAll('＋', '+')
+                            .replaceAll('×', '*')
+                            .replaceAll('÷', '/')
+                    );
+                },
+            };
+        },
+
+        directives: {
+            lastFocus: {
+                mounted(el, binding) {
+                    if (binding) {
+                        el.focus();
+                    }
+                },
+            },
+        },
+    }).mount('#app');
+</script>
+</body>
+</html>
