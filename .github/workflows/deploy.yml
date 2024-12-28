@@ -19,7 +19,7 @@ jobs:
     deploy:
         needs: call-build-blog
         environment:
-            name: github-pages
+            name: wait-to-deploy
         runs-on: ubuntu-latest
         name: Deploy
         steps:
