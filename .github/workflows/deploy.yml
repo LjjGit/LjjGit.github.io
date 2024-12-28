@@ -14,14 +14,14 @@ permissions:
     id-token: write
 
 jobs:
+    call-build-blog:
+        uses: ./.github/workflows/build-blog.yml
     deploy:
         environment:
             name: github-pages
         runs-on: ubuntu-latest
         name: Deploy
         steps:
-            - name: Call build-blog.yml
-              uses: ./.github/workflows/build-blog.yml
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4
