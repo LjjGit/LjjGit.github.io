@@ -1,12 +1,7 @@
 name: Build blog
 
 on:
-    push:
-        branches: [master]
-
-concurrency:
-    group: pages
-    cancel-in-progress: false
+    workflow_call:
 
 defaults:
     run:
