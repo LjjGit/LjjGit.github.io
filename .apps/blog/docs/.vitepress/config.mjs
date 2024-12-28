@@ -4,8 +4,8 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
     outDir: '../../../.deploy/blog',
     base: '/blog/',
-    title: 'My Awesome Project',
-    description: 'A VitePress Site',
+    title: '博客 Blog',
+    description: 'Vitepress generate. Github actions deploy',
     locales: {
         root: {
             lang: 'zh',
@@ -20,10 +20,11 @@ export default defineConfig({
 
         sidebar: [
             {
-                text: 'Examples',
+                text: '示例',
                 items: [
-                    {text: 'Markdown Examples', link: '/markdown-examples'},
-                    {text: 'Runtime API Examples', link: '/api-examples'},
+                    {text: 'Markdown 示例', link: '/markdown-examples'},
+                    {text: '运行时 API 示例', link: '/api-examples'},
+                    {text: '学习使用Github actions', link: '/learn-github-actions'},
                 ],
             },
         ],
