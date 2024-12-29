@@ -14,21 +14,15 @@ permissions:
     id-token: write
 
 jobs:
-    call-workflow:
-        uses:
-            - ./.github/workflows/before.yml
-            - ./.github/workflows/build-blog.yml
+    call-build-blog:
+        uses: ./.github/workflows/build-blog.yml
     deploy:
-        needs: call-workflow
+        needs: call-build-blog
         environment:
             name: github-pages
         runs-on: ubuntu-latest
         name: Deploy
         steps:
-            - name: Upload artifact
-              uses: actions/upload-pages-artifact@v3
-              with:
-                  path: .deploy
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4
