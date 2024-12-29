@@ -23,4 +23,7 @@ export default defineConfig({
         }),
     ],
     base: '/tools/',
+    build: {
+        outDir: import.meta.dirname + '/../../.deploy/tools',
+    },
 });
