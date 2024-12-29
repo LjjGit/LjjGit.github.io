@@ -9,24 +9,10 @@ defaults:
 
 jobs:
     build:
-        name: Build
+        name: Build Blog
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
-            - name: Setup Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: latest
-            - name: Setup Pages
-              uses: actions/configure-pages@v4
             - name: Install dependencies
               run: npm ci # ci: Clean install a project
             - name: Build with VitePress
               run: npm run docs:build
-            - name: Upload artifact
-              uses: actions/upload-pages-artifact@v3
-              with:
-                  path: .deploy
