@@ -14,12 +14,13 @@ permissions:
     id-token: write
 
 jobs:
-    call-before:
-        uses: ./.github/workflows/before.yml
-    call-build-blog:
-        uses: ./.github/workflows/build-blog.yml
+    call-workflow:
+        uses: [
+            ./.github/workflows/before.yml,
+            ./.github/workflows/build-blog.yml
+        ]
     deploy:
-        needs: [call-before, call-build-blog]
+        needs: call-workflow
         environment:
             name: github-pages
         runs-on: ubuntu-latest
