@@ -17,9 +17,10 @@ jobs:
     call-before:
         uses: ./.github/workflows/before.yml
     call-build-blog:
+        needs: call-before
         uses: ./.github/workflows/build-blog.yml
     deploy:
-        needs: [call-before, call-build-blog]
+        needs: [call-build-blog]
         environment:
             name: github-pages
         runs-on: ubuntu-latest
