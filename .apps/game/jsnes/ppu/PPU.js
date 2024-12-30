@@ -935,8 +935,13 @@ export class PPU
         return this.vramMem[this.vramMirrorTable[address]];
     }
 
-    // Writes to memory, taking into account
-    // mirroring/mapping of address ranges.
+    /**
+     * Writes to memory, taking into account
+     * mirroring/mapping of address ranges.
+     *
+     * @param {number} address
+     * @param value
+     */
     mirroredWrite(address, value)
     {
         if (address >= 0x3f00 && address < 0x3f20) {

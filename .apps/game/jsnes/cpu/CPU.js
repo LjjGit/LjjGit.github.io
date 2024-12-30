@@ -47,6 +47,9 @@ export class CPU
         this.REG_X = null;
         this.REG_Y = null;
         this.REG_SP = null;
+        /**
+         * @type {number|null}
+         */
         this.REG_PC = null;
         this.REG_PC_NEW = null;
         this.REG_STATUS = null;

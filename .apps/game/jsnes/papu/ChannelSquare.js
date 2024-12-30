@@ -31,6 +31,7 @@ export class ChannelSquare
 
     /**
      * @param {import('./PAPU').PAPU} papu
+     * @param {boolean} square1
      */
     constructor(papu, square1)
     {
