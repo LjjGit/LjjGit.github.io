@@ -1,4 +1,4 @@
-var utils = require("./utils");
+import { toJSON, fromJSON } from './utils';
 
 var CPU = function (nes) {
   this.nes = nes;
@@ -1404,11 +1404,11 @@ CPU.prototype = {
   ],
 
   toJSON: function () {
-    return utils.toJSON(this);
+    return toJSON(this);
   },
 
   fromJSON: function (s) {
-    utils.fromJSON(this, s);
+    fromJSON(this, s);
   },
 };
 

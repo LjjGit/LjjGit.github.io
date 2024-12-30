@@ -1,4 +1,4 @@
-var utils = require("./utils");
+import { toJSON, fromJSON } from './utils';
 
 var CPU_FREQ_NTSC = 1789772.5; //1789772.72727272d;
 // var CPU_FREQ_PAL = 1773447.4;
@@ -768,7 +768,7 @@ PAPU.prototype = {
   ],
 
   toJSON: function () {
-    let obj = utils.toJSON(this);
+    let obj = toJSON(this);
     obj.dmc = this.dmc.toJSON();
     obj.noise = this.noise.toJSON();
     obj.square1 = this.square1.toJSON();
@@ -778,7 +778,7 @@ PAPU.prototype = {
   },
 
   fromJSON: function (s) {
-    utils.fromJSON(this, s);
+    fromJSON(this, s);
     this.dmc.fromJSON(s.dmc);
     this.noise.fromJSON(s.noise);
     this.square1.fromJSON(s.square1);
@@ -990,11 +990,11 @@ ChannelDM.prototype = {
   ],
 
   toJSON: function () {
-    return utils.toJSON(this);
+    return toJSON(this);
   },
 
   fromJSON: function (s) {
-    utils.fromJSON(this, s);
+    fromJSON(this, s);
   },
 };
 
@@ -1146,11 +1146,11 @@ ChannelNoise.prototype = {
   ],
 
   toJSON: function () {
-    return utils.toJSON(this);
+    return toJSON(this);
   },
 
   fromJSON: function (s) {
-    utils.fromJSON(this, s);
+    fromJSON(this, s);
   },
 };
 
@@ -1388,11 +1388,11 @@ ChannelSquare.prototype = {
   ],
 
   toJSON: function () {
-    return utils.toJSON(this);
+    return toJSON(this);
   },
 
   fromJSON: function (s) {
-    utils.fromJSON(this, s);
+    fromJSON(this, s);
   },
 };
 
@@ -1548,11 +1548,11 @@ ChannelTriangle.prototype = {
   ],
 
   toJSON: function () {
-    return utils.toJSON(this);
+    return toJSON(this);
   },
 
   fromJSON: function (s) {
-    utils.fromJSON(this, s);
+    fromJSON(this, s);
   },
 };
 
