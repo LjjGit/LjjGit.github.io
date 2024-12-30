@@ -150,7 +150,7 @@ export class Mapper0
                         // 0x4017:
                         // Joystick 2 + Strobe
                         // https://wiki.nesdev.com/w/index.php/Zapper
-                        var w;
+                        let w;
 
                         if (
                             this.zapperX !== null &&
@@ -247,7 +247,7 @@ export class Mapper0
 
     joy1Read()
     {
-        var ret;
+        let ret;
 
         switch (this.joy1StrobeState) {
             case 0:
@@ -290,7 +290,7 @@ export class Mapper0
 
     joy2Read()
     {
-        var ret;
+        let ret;
 
         switch (this.joy2StrobeState) {
             case 0:
@@ -383,7 +383,7 @@ export class Mapper0
     loadBatteryRam()
     {
         if (this.nes.rom.batteryRam) {
-            var ram = this.nes.rom.batteryRam;
+            const ram = this.nes.rom.batteryRam;
             if (ram !== null && ram.length === 0x2000) {
                 // Load Battery RAM into memory:
                 copyArrayElements(ram, 0, this.nes.cpu.mem, 0x6000, 0x2000);
@@ -421,7 +421,7 @@ export class Mapper0
             4096,
         );
 
-        var vromTile = this.nes.rom.vromTile[bank % this.nes.rom.vromCount];
+        const vromTile = this.nes.rom.vromTile[bank % this.nes.rom.vromCount];
         copyArrayElements(
             vromTile,
             0,
@@ -458,8 +458,8 @@ export class Mapper0
         }
         this.nes.ppu.triggerRendering();
 
-        var bank4k = Math.floor(bank1k / 4) % this.nes.rom.vromCount;
-        var bankoffset = (bank1k % 4) * 1024;
+        const bank4k = Math.floor(bank1k / 4) % this.nes.rom.vromCount;
+        const bankoffset = (bank1k % 4) * 1024;
         copyArrayElements(
             this.nes.rom.vrom[bank4k],
             bankoffset,
@@ -469,9 +469,9 @@ export class Mapper0
         );
 
         // Update tiles:
-        var vromTile = this.nes.rom.vromTile[bank4k];
-        var baseIndex = address >> 4;
-        for (var i = 0; i < 64; i++) {
+        const vromTile = this.nes.rom.vromTile[bank4k];
+        const baseIndex = address >> 4;
+        for (let i = 0; i < 64; i++) {
             this.nes.ppu.ptTile[baseIndex + i] = vromTile[(bank1k % 4 << 6) + i];
         }
     }
@@ -483,8 +483,8 @@ export class Mapper0
         }
         this.nes.ppu.triggerRendering();
 
-        var bank4k = Math.floor(bank2k / 2) % this.nes.rom.vromCount;
-        var bankoffset = (bank2k % 2) * 2048;
+        const bank4k = Math.floor(bank2k / 2) % this.nes.rom.vromCount;
+        const bankoffset = (bank2k % 2) * 2048;
         copyArrayElements(
             this.nes.rom.vrom[bank4k],
             bankoffset,
@@ -494,17 +494,17 @@ export class Mapper0
         );
 
         // Update tiles:
-        var vromTile = this.nes.rom.vromTile[bank4k];
-        var baseIndex = address >> 4;
-        for (var i = 0; i < 128; i++) {
+        const vromTile = this.nes.rom.vromTile[bank4k];
+        const baseIndex = address >> 4;
+        for (let i = 0; i < 128; i++) {
             this.nes.ppu.ptTile[baseIndex + i] = vromTile[(bank2k % 2 << 7) + i];
         }
     }
 
     load8kRomBank(bank8k, address)
     {
-        var bank16k = Math.floor(bank8k / 2) % this.nes.rom.romCount;
-        var offset = (bank8k % 2) * 8192;
+        const bank16k = Math.floor(bank8k / 2) % this.nes.rom.romCount;
+        const offset = (bank8k % 2) * 8192;
 
         //this.nes.cpu.mem.write(address,this.nes.rom.rom[bank16k],offset,8192);
         copyArrayElements(

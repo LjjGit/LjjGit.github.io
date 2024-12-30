@@ -194,7 +194,7 @@ export class ChannelSquare
 
     writeReg(address, value)
     {
-        var addrAdd = this.sqr1 ? 0 : 4;
+        const addrAdd = this.sqr1 ? 0 : 4;
         if (address === 0x4000 + addrAdd) {
             // Volume/Envelope decay:
             this.envDecayDisable = (value & 0x10) !== 0;

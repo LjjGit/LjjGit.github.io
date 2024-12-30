@@ -15,15 +15,15 @@ export class Mapper11 extends Mapper0
             super.write(address, value);
         } else {
             // Swap in the given PRG-ROM bank:
-            var prgbank1 = ((value & 0xf) * 2) % this.nes.rom.romCount;
-            var prgbank2 = ((value & 0xf) * 2 + 1) % this.nes.rom.romCount;
+            const prgbank1 = ((value & 0xf) * 2) % this.nes.rom.romCount;
+            const prgbank2 = ((value & 0xf) * 2 + 1) % this.nes.rom.romCount;
 
             this.loadRomBank(prgbank1, 0x8000);
             this.loadRomBank(prgbank2, 0xc000);
 
             if (this.nes.rom.vromCount > 0) {
                 // Swap in the given VROM bank at 0x0000:
-                var bank = ((value >> 4) * 2) % this.nes.rom.vromCount;
+                const bank = ((value >> 4) * 2) % this.nes.rom.vromCount;
                 this.loadVromBank(bank, 0x0000);
                 this.loadVromBank(bank + 1, 0x1000);
             }

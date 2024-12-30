@@ -75,17 +75,17 @@ export class CPU
         // Main memory
         this.mem = new Array(0x10000);
 
-        for (var i = 0; i < 0x2000; i++) {
+        for (let i = 0; i < 0x2000; i++) {
             this.mem[i] = 0xff;
         }
-        for (var p = 0; p < 4; p++) {
-            var j = p * 0x800;
+        for (let p = 0; p < 4; p++) {
+            const j = p * 0x800;
             this.mem[j + 0x008] = 0xf7;
             this.mem[j + 0x009] = 0xef;
             this.mem[j + 0x00a] = 0xdf;
             this.mem[j + 0x00f] = 0xbf;
         }
-        for (var k = 0x2001; k < this.mem.length; k++) {
+        for (let k = 0x2001; k < this.mem.length; k++) {
             this.mem[k] = 0;
         }
 
@@ -131,8 +131,8 @@ export class CPU
     // Emulates a single CPU instruction, returns the number of cycles
     emulate()
     {
-        var temp;
-        var add;
+        let temp;
+        let add;
 
         // Check interrupts:
         if (this.irqRequested) {
@@ -177,18 +177,18 @@ export class CPU
             this.irqRequested = false;
         }
 
-        var opinf = this.opdata[this.nes.mmap.load(this.REG_PC + 1)];
-        var cycleCount = opinf >> 24;
-        var cycleAdd = 0;
+        const opinf = this.opdata[this.nes.mmap.load(this.REG_PC + 1)];
+        let cycleCount = opinf >> 24;
+        let cycleAdd = 0;
 
         // Find address mode:
-        var addrMode = (opinf >> 8) & 0xff;
+        const addrMode = (opinf >> 8) & 0xff;
 
         // Increment PC by number of op bytes:
-        var opaddr = this.REG_PC;
+        const opaddr = this.REG_PC;
         this.REG_PC += (opinf >> 16) & 0xff;
 
-        var addr = 0;
+        let addr = 0;
         switch (addrMode) {
             case 0: {
                 // Zero Page mode. Use the address given after the opcode,

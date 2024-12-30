@@ -163,7 +163,7 @@ export class PPU
 
     reset()
     {
-        var i;
+        let i;
 
         // Memory
         this.vramMem = new Array(0x8000);
@@ -303,7 +303,7 @@ export class PPU
         if (this.vramMirrorTable === null) {
             this.vramMirrorTable = new Array(0x8000);
         }
-        for (var i = 0; i < 0x8000; i++) {
+        for (let i = 0; i < 0x8000; i++) {
             this.vramMirrorTable[i] = i;
         }
 
@@ -372,7 +372,7 @@ export class PPU
     // The 'to' region is the region that is physically in memory.
     defineMirrorRegion(fromStart, toStart, size)
     {
-        for (var i = 0; i < size; i++) {
+        for (let i = 0; i < size; i++) {
             this.vramMirrorTable[fromStart + i] = toStart + i;
         }
     }
@@ -501,7 +501,7 @@ export class PPU
     startFrame()
     {
         // Set background color:
-        var bgColor = 0;
+        let bgColor = 0;
 
         if (this.f_dispType === 0) {
             // Color display.
@@ -538,12 +538,12 @@ export class PPU
             }
         }
 
-        var buffer = this.buffer;
-        var i;
+        const buffer = this.buffer;
+        let i;
         for (i = 0; i < 256 * 240; i++) {
             buffer[i] = bgColor;
         }
-        var pixrendered = this.pixrendered;
+        const pixrendered = this.pixrendered;
         for (i = 0; i < pixrendered.length; i++) {
             pixrendered[i] = 65;
         }
@@ -551,8 +551,8 @@ export class PPU
 
     endFrame()
     {
-        var i, x, y;
-        var buffer = this.buffer;
+        let i, x, y;
+        const buffer = this.buffer;
 
         // Draw spr#0 hit coordinates:
         if (this.showSpr0Hit) {
@@ -659,7 +659,7 @@ export class PPU
 
     setStatusFlag(flag, value)
     {
-        var n = 1 << flag;
+        const n = 1 << flag;
         this.nes.cpu.mem[0x2002] =
             (this.nes.cpu.mem[0x2002] & (255 - n)) | (value ? n : 0);
     }
@@ -668,7 +668,7 @@ export class PPU
     // Read the Status Register.
     readStatusRegister()
     {
-        var tmp = this.nes.cpu.mem[0x2002];
+        const tmp = this.nes.cpu.mem[0x2002];
 
         // Reset scroll & VRAM Address toggle:
         this.firstWrite = true;
@@ -768,7 +768,7 @@ export class PPU
     // Read from PPU memory. The address should be set first.
     vramLoad()
     {
-        var tmp;
+        let tmp;
 
         this.cntsToAddress();
         this.regsToAddress();
@@ -840,9 +840,9 @@ export class PPU
     // into Sprite RAM.
     sramDMA(value)
     {
-        var baseAddress = value * 0x100;
-        var data;
-        for (var i = this.sramAddress; i < 256; i++) {
+        const baseAddress = value * 0x100;
+        let data;
+        for (let i = this.sramAddress; i < 256; i++) {
             data = this.nes.cpu.mem[baseAddress + i];
             this.spriteMem[i] = data;
             this.spriteRamWriteUpdate(i, data);
@@ -854,7 +854,7 @@ export class PPU
     // Updates the scroll registers from a new VRAM address.
     regsFromAddress()
     {
-        var address = (this.vramTmpAddress >> 8) & 0xff;
+        let address = (this.vramTmpAddress >> 8) & 0xff;
         this.regFV = (address >> 4) & 7;
         this.regV = (address >> 3) & 1;
         this.regH = (address >> 2) & 1;
@@ -868,7 +868,7 @@ export class PPU
     // Updates the scroll registers from a new VRAM address.
     cntsFromAddress()
     {
-        var address = (this.vramAddress >> 8) & 0xff;
+        let address = (this.vramAddress >> 8) & 0xff;
         this.cntFV = (address >> 4) & 3;
         this.cntV = (address >> 3) & 1;
         this.cntH = (address >> 2) & 1;
@@ -881,12 +881,12 @@ export class PPU
 
     regsToAddress()
     {
-        var b1 = (this.regFV & 7) << 4;
+        let b1 = (this.regFV & 7) << 4;
         b1 |= (this.regV & 1) << 3;
         b1 |= (this.regH & 1) << 2;
         b1 |= (this.regVT >> 3) & 3;
 
-        var b2 = (this.regVT & 7) << 5;
+        let b2 = (this.regVT & 7) << 5;
         b2 |= this.regHT & 31;
 
         this.vramTmpAddress = ((b1 << 8) | b2) & 0x7fff;
@@ -894,12 +894,12 @@ export class PPU
 
     cntsToAddress()
     {
-        var b1 = (this.cntFV & 7) << 4;
+        let b1 = (this.cntFV & 7) << 4;
         b1 |= (this.cntV & 1) << 3;
         b1 |= (this.cntH & 1) << 2;
         b1 |= (this.cntVT >> 3) & 3;
 
-        var b2 = (this.cntVT & 7) << 5;
+        let b2 = (this.cntVT & 7) << 5;
         b2 |= this.cntHT & 31;
 
         this.vramAddress = ((b1 << 8) | b2) & 0x7fff;
@@ -907,7 +907,7 @@ export class PPU
 
     incTileCounter(count)
     {
-        for (var i = count; i !== 0; i--) {
+        for (let i = count; i !== 0; i--) {
             this.cntHT++;
             if (this.cntHT === 32) {
                 this.cntHT = 0;
@@ -987,15 +987,15 @@ export class PPU
         }
 
         if (this.f_bgVisibility === 1) {
-            var si = startScan << 8;
-            var ei = (startScan + scanCount) << 8;
+            const si = startScan << 8;
+            let ei = (startScan + scanCount) << 8;
             if (ei > 0xf000) {
                 ei = 0xf000;
             }
-            var buffer = this.buffer;
-            var bgbuffer = this.bgbuffer;
-            var pixrendered = this.pixrendered;
-            for (var destIndex = si; destIndex < ei; destIndex++) {
+            const buffer = this.buffer;
+            const bgbuffer = this.bgbuffer;
+            const pixrendered = this.pixrendered;
+            for (let destIndex = si; destIndex < ei; destIndex++) {
                 if (pixrendered[destIndex] > 0xff) {
                     buffer[destIndex] = bgbuffer[destIndex];
                 }
@@ -1011,8 +1011,8 @@ export class PPU
 
     renderBgScanline(bgbuffer, scan)
     {
-        var baseTile = this.regS === 0 ? 0 : 256;
-        var destIndex = (scan << 8) - this.regFH;
+        const baseTile = this.regS === 0 ? 0 : 256;
+        let destIndex = (scan << 8) - this.regFH;
 
         this.curNt = this.ntable1[this.cntV + this.cntV + this.cntH];
 
@@ -1021,18 +1021,18 @@ export class PPU
         this.curNt = this.ntable1[this.cntV + this.cntV + this.cntH];
 
         if (scan < 240 && scan - this.cntFV >= 0) {
-            var tscanoffset = this.cntFV << 3;
-            var scantile = this.scantile;
-            var attrib = this.attrib;
-            var ptTile = this.ptTile;
-            var nameTable = this.nameTable;
-            var imgPalette = this.imgPalette;
-            var pixrendered = this.pixrendered;
-            var targetBuffer = bgbuffer ? this.bgbuffer : this.buffer;
+            const tscanoffset = this.cntFV << 3;
+            const scantile = this.scantile;
+            const attrib = this.attrib;
+            const ptTile = this.ptTile;
+            const nameTable = this.nameTable;
+            const imgPalette = this.imgPalette;
+            const pixrendered = this.pixrendered;
+            const targetBuffer = bgbuffer ? this.bgbuffer : this.buffer;
 
-            var t, tpix, att, col;
+            let t, tpix, att, col;
 
-            for (var tile = 0; tile < 32; tile++) {
+            for (let tile = 0; tile < 32; tile++) {
                 if (scan >= 0) {
                     // Fetch tile & attrib data:
                     if (this.validTileData) {
@@ -1060,8 +1060,8 @@ export class PPU
                     }
 
                     // Render tile scanline:
-                    var sx = 0;
-                    var x = (tile << 3) - this.regFH;
+                    let sx = 0;
+                    const x = (tile << 3) - this.regFH;
 
                     if (x > -8) {
                         if (x < 0) {
@@ -1124,7 +1124,7 @@ export class PPU
     renderSpritesPartially(startscan, scancount, bgPri)
     {
         if (this.f_spVisibility === 1) {
-            for (var i = 0; i < 64; i++) {
+            for (let i = 0; i < 64; i++) {
                 if (
                     this.bgPriority[i] === bgPri &&
                     this.sprX[i] >= 0 &&
@@ -1182,13 +1182,13 @@ export class PPU
                         }
                     } else {
                         // 8x16 sprites
-                        var top = this.sprTile[i];
+                        let top = this.sprTile[i];
                         if ((top & 1) !== 0) {
                             top = this.sprTile[i] - 1 + 256;
                         }
 
-                        var srcy1 = 0;
-                        var srcy2 = 8;
+                        let srcy1 = 0;
+                        let srcy2 = 8;
 
                         if (this.sprY[i] < startscan) {
                             srcy1 = startscan - this.sprY[i] - 1;
@@ -1251,10 +1251,10 @@ export class PPU
         this.spr0HitX = -1;
         this.spr0HitY = -1;
 
-        var toffset;
-        var tIndexAdd = this.f_spPatternTable === 0 ? 0 : 256;
-        var x, y, t, i;
-        var bufferIndex;
+        let toffset;
+        const tIndexAdd = this.f_spPatternTable === 0 ? 0 : 256;
+        let x, y, t, i;
+        let bufferIndex;
 
         x = this.sprX[0];
         y = this.sprY[0] + 1;
@@ -1430,7 +1430,7 @@ export class PPU
     // into the two buffered palettes.
     updatePalettes()
     {
-        var i;
+        let i;
 
         for (i = 0; i < 16; i++) {
             if (this.f_dispType === 0) {
@@ -1461,8 +1461,8 @@ export class PPU
     // In vNES, there is a version of this with 4 arguments which isn't used.
     patternWrite(address, value)
     {
-        var tileIndex = Math.floor(address / 16);
-        var leftOver = address % 16;
+        const tileIndex = Math.floor(address / 16);
+        const leftOver = address % 16;
         if (leftOver < 8) {
             this.ptTile[tileIndex].setScanline(
                 leftOver,
@@ -1501,7 +1501,7 @@ export class PPU
     // data with this new byte of info.
     spriteRamWriteUpdate(address, value)
     {
-        var tIndex = Math.floor(address / 4);
+        const tIndex = Math.floor(address / 4);
 
         if (tIndex === 0) {
             //updateSpr0Hit();
@@ -1542,8 +1542,8 @@ export class PPU
 
     toJSON()
     {
-        var i;
-        var state = toJSON(this);
+        let i;
+        const state = toJSON(this);
 
         state.nameTable = [];
         for (i = 0; i < this.nameTable.length; i++) {
@@ -1560,7 +1560,7 @@ export class PPU
 
     fromJSON(state)
     {
-        var i;
+        let i;
 
         fromJSON(this, state);
 

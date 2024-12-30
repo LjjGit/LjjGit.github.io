@@ -110,7 +110,7 @@ export class OpData
         this.opdata = new Array(256);
 
         // Set all to invalid instruction (to detect crashes):
-        for (var i = 0; i < 256; i++) this.opdata[i] = 0xff;
+        for (let i = 0; i < 256; i++) this.opdata[i] = 0xff;
 
         // Now fill in all valid opcodes:
 

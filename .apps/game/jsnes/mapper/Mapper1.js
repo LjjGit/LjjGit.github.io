@@ -67,7 +67,7 @@ export class Mapper1 extends Mapper0
 
     setReg(reg, value)
     {
-        var tmp;
+        let tmp;
 
         switch (reg) {
             case 0:
@@ -155,8 +155,8 @@ export class Mapper1 extends Mapper0
                 // Select ROM bank:
                 // -------------------------
                 tmp = value & 0xf;
-                var bank;
-                var baseBank = 0;
+                let bank;
+                let baseBank = 0;
 
                 if (this.nes.rom.romCount >= 32) {
                     // 1024 kB cart

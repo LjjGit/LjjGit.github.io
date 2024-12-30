@@ -144,7 +144,7 @@ export class PAPU
         this.initDACtables();
 
         // Init sound registers:
-        for (var i = 0; i < 0x14; i++) {
+        for (let i = 0; i < 0x14; i++) {
             if (i === 0x10) {
                 this.writeReg(0x4010, 0x10);
             } else {
@@ -210,7 +210,7 @@ export class PAPU
     readReg(address)
     {
         // Read 0x4015:
-        var tmp = 0;
+        let tmp = 0;
         tmp |= this.square1.getLengthStatus();
         tmp |= this.square2.getLengthStatus() << 1;
         tmp |= this.triangle.getLengthStatus() << 2;
@@ -326,7 +326,7 @@ export class PAPU
 
         // Don't process ticks beyond next sampling:
         nCycles += this.extraCycles;
-        var maxCycles = this.sampleTimerMax - this.sampleTimer;
+        const maxCycles = this.sampleTimerMax - this.sampleTimer;
         if (nCycles << 10 > maxCycles) {
             this.extraCycles = ((nCycles << 10) - maxCycles) >> 10;
             nCycles -= this.extraCycles;
@@ -334,11 +334,11 @@ export class PAPU
             this.extraCycles = 0;
         }
 
-        var dmc = this.dmc;
-        var triangle = this.triangle;
-        var square1 = this.square1;
-        var square2 = this.square2;
-        var noise = this.noise;
+        const dmc = this.dmc;
+        const triangle = this.triangle;
+        const square1 = this.square1;
+        const square2 = this.square2;
+        const noise = this.noise;
 
         // Clock DMC:
         if (dmc.isEnabled) {
@@ -393,7 +393,7 @@ export class PAPU
         }
 
         // Clock noise channel Prog timer:
-        var acc_c = nCycles;
+        let acc_c = nCycles;
         if (noise.progTimerCount - acc_c > 0) {
             // Do all cycles at once:
             noise.progTimerCount -= acc_c;
@@ -533,7 +533,7 @@ export class PAPU
     // Samples the channels, mixes the output together, then writes to buffer.
     sample()
     {
-        var sq_index, tnd_index;
+        let sq_index, tnd_index;
 
         if (this.accCount > 0) {
             this.smpSquare1 <<= 4;
@@ -555,7 +555,7 @@ export class PAPU
             this.smpDmc = this.dmc.sample << 4;
         }
 
-        var smpNoise = Math.floor((this.noise.accValue << 4) / this.noise.accCount);
+        const smpNoise = Math.floor((this.noise.accValue << 4) / this.noise.accCount);
         this.noise.accValue = smpNoise >> 4;
         this.noise.accCount = 1;
 
@@ -577,7 +577,7 @@ export class PAPU
         if (tnd_index >= this.tnd_table.length) {
             tnd_index = this.tnd_table.length - 1;
         }
-        var sampleValueL =
+        let sampleValueL =
             this.square_table[sq_index] + this.tnd_table[tnd_index] - this.dcValue;
 
         // Right channel:
@@ -596,17 +596,17 @@ export class PAPU
         if (tnd_index >= this.tnd_table.length) {
             tnd_index = this.tnd_table.length - 1;
         }
-        var sampleValueR =
+        let sampleValueR =
             this.square_table[sq_index] + this.tnd_table[tnd_index] - this.dcValue;
 
         // Remove DC from left channel:
-        var smpDiffL = sampleValueL - this.prevSampleL;
+        const smpDiffL = sampleValueL - this.prevSampleL;
         this.prevSampleL += smpDiffL;
         this.smpAccumL += smpDiffL - (this.smpAccumL >> 10);
         sampleValueL = this.smpAccumL;
 
         // Remove DC from right channel:
-        var smpDiffR = sampleValueR - this.prevSampleR;
+        const smpDiffR = sampleValueR - this.prevSampleR;
         this.prevSampleR += smpDiffR;
         this.smpAccumR += smpDiffR - (this.smpAccumR >> 10);
         sampleValueR = this.smpAccumR;
@@ -653,7 +653,7 @@ export class PAPU
 
     setPanning(pos)
     {
-        for (var i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             this.panning[i] = pos[i];
         }
         this.updateStereoPos();
@@ -756,9 +756,9 @@ export class PAPU
 
     initDACtables()
     {
-        var value, ival, i;
-        var max_sqr = 0;
-        var max_tnd = 0;
+        let value, ival, i;
+        let max_sqr = 0;
+        let max_tnd = 0;
 
         this.square_table = new Array(32 * 16);
         this.tnd_table = new Array(204 * 16);

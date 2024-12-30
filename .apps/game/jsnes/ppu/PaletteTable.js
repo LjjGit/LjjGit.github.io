@@ -30,10 +30,10 @@ export class PaletteTable
 
     makeTables()
     {
-        var r, g, b, col, i, rFactor, gFactor, bFactor;
+        let r, g, b, col, i, rFactor, gFactor, bFactor;
 
         // Calculate a table for each possible emphasis setting:
-        for (var emph = 0; emph < 8; emph++) {
+        for (let emph = 0; emph < 8; emph++) {
             // Determine color component factors:
             rFactor = 1.0;
             gFactor = 1.0;
@@ -69,7 +69,7 @@ export class PaletteTable
     {
         if (emph !== this.currentEmph) {
             this.currentEmph = emph;
-            for (var i = 0; i < 64; i++) {
+            for (let i = 0; i < 64; i++) {
                 this.curTable[i] = this.emphTable[emph][i];
             }
         }

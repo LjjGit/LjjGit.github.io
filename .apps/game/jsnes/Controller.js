@@ -12,7 +12,7 @@ export class Controller
     constructor()
     {
         this.state = new Array(8);
-        for (var i = 0; i < this.state.length; i++) {
+        for (let i = 0; i < this.state.length; i++) {
             this.state[i] = 0x40;
         }
     }

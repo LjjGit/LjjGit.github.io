@@ -28,7 +28,7 @@ export class NES
             sampleRate: 48000, // Sound sample rate in hz
         };
         if (typeof opts !== 'undefined') {
-            var key;
+            let key;
             for (key in this.opts) {
                 if (typeof opts[key] !== 'undefined') {
                     this.opts[key] = opts[key];
@@ -87,11 +87,11 @@ export class NES
     frame()
     {
         this.ppu.startFrame();
-        var cycles = 0;
-        var emulateSound = this.opts.emulateSound;
-        var cpu = this.cpu;
-        var ppu = this.ppu;
-        var papu = this.papu;
+        let cycles = 0;
+        const emulateSound = this.opts.emulateSound;
+        const cpu = this.cpu;
+        const ppu = this.ppu;
+        const papu = this.papu;
         FRAMELOOP: for (; ;) {
             if (this.break) break;
             if (cpu.cyclesToHalt === 0) {
@@ -177,8 +177,8 @@ export class NES
 
     getFPS()
     {
-        var now = +new Date();
-        var fps = null;
+        const now = +new Date();
+        let fps = null;
         if (this.lastFpsTime) {
             fps = this.fpsFrameCount / ((now - this.lastFpsTime) / 1000);
         }

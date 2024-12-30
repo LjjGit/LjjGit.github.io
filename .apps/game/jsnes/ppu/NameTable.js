@@ -8,7 +8,7 @@ export class NameTable
 
         this.tile = new Array(width * height);
         this.attrib = new Array(width * height);
-        for (var i = 0; i < width * height; i++) {
+        for (let i = 0; i < width * height; i++) {
             this.tile[i] = 0;
             this.attrib[i] = 0;
         }
@@ -26,17 +26,17 @@ export class NameTable
 
     writeAttrib(index, value)
     {
-        var basex = (index % 8) * 4;
-        var basey = Math.floor(index / 8) * 4;
-        var add;
-        var tx, ty;
-        var attindex;
+        const basex = (index % 8) * 4;
+        const basey = Math.floor(index / 8) * 4;
+        let add;
+        let tx, ty;
+        let attindex;
 
-        for (var sqy = 0; sqy < 2; sqy++) {
-            for (var sqx = 0; sqx < 2; sqx++) {
+        for (let sqy = 0; sqy < 2; sqy++) {
+            for (let sqx = 0; sqx < 2; sqx++) {
                 add = (value >> (2 * (sqy * 2 + sqx))) & 3;
-                for (var y = 0; y < 2; y++) {
-                    for (var x = 0; x < 2; x++) {
+                for (let y = 0; y < 2; y++) {
+                    for (let x = 0; x < 2; x++) {
                         tx = basex + sqx * 2 + x;
                         ty = basey + sqy * 2 + y;
                         attindex = ty * this.width + tx;
