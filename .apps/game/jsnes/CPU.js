@@ -1,7 +1,7 @@
 import { toJSON, fromJSON } from './utils';
 import { OpData } from './OpData';
 
-export default class CPU
+export class CPU
 {
     constructor(nes)
     {

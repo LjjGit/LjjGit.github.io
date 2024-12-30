@@ -1,4 +1,4 @@
-export default class Controller
+export class Controller
 {
     static BUTTON_A = 0;
     static BUTTON_B = 1;

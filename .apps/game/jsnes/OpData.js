@@ -490,7 +490,7 @@ export class OpData
         this.setOp(this.INS_IGN, 0xf4, this.ADDR_ZPX, 2, 4);
 
         // prettier-ignore
-        this.cycTable = new Array(
+        this.cycTable = [
             /*0x00*/ 7, 6, 2, 8, 3, 3, 5, 5, 3, 2, 2, 2, 4, 4, 6, 6,
             /*0x10*/ 2, 5, 2, 8, 4, 4, 6, 6, 2, 4, 2, 7, 4, 4, 7, 7,
             /*0x20*/ 6, 6, 2, 8, 3, 3, 5, 5, 4, 2, 2, 2, 4, 4, 6, 6,
@@ -507,7 +507,7 @@ export class OpData
             /*0xD0*/ 2, 5, 2, 8, 4, 4, 6, 6, 2, 4, 2, 7, 4, 4, 7, 7,
             /*0xE0*/ 2, 6, 3, 8, 3, 3, 5, 5, 2, 2, 2, 2, 4, 4, 6, 6,
             /*0xF0*/ 2, 5, 2, 8, 4, 4, 6, 6, 2, 4, 2, 7, 4, 4, 7, 7,
-        );
+        ];
 
         this.instname = new Array(70);
 
@@ -583,7 +583,7 @@ export class OpData
         this.instname[68] = 'SKB';
         this.instname[69] = 'IGN';
 
-        this.addrDesc = new Array(
+        this.addrDesc = [
             'Zero Page           ',
             'Relative            ',
             'Implied             ',
@@ -597,7 +597,7 @@ export class OpData
             'Preindexed Indirect ',
             'Postindexed Indirect',
             'Indirect Absolute   ',
-        );
+        ];
     }
 
     setOp(inst, op, addr, size, cycles)
