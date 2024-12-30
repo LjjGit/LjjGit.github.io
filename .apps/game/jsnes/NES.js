@@ -1,7 +1,7 @@
-import { CPU } from './CPU';
+import { CPU } from './cpu/CPU';
 import { Controller } from './Controller';
-import { PPU } from './PPU';
-import { PAPU } from './PAPU';
+import { PPU } from './ppu/PPU';
+import { PAPU } from './papu/PAPU';
 import { ROM } from './ROM';
 
 export class NES

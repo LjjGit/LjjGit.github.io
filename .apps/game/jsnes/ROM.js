@@ -1,5 +1,5 @@
-var Mappers = require('./mappers');
-import { Tile } from './Tile';
+import { Mappers } from './mapper/Mappers';
+import { Tile } from './ppu/Tile';
 
 export class ROM
 {
@@ -27,6 +27,9 @@ export class ROM
     mapperType = null;
     valid = false;
 
+    /**
+     * @param {import('./NES').NES} nes
+     */
     constructor(nes)
     {
         this.nes = nes;

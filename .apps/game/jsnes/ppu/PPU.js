@@ -1,10 +1,86 @@
 import { Tile } from './Tile';
-import { toJSON, fromJSON } from './utils';
+import { fromJSON, toJSON } from '../utils';
 import { NameTable } from './NameTable';
 import { PaletteTable } from './PaletteTable';
 
 export class PPU
 {
+    // Status flags:
+    STATUS_VRAMWRITE = 4;
+    STATUS_SLSPRITECOUNT = 5;
+    STATUS_SPRITE0HIT = 6;
+    STATUS_VBLANK = 7;
+    JSON_PROPERTIES = [
+        // Memory
+        'vramMem',
+        'spriteMem',
+        // Counters
+        'cntFV',
+        'cntV',
+        'cntH',
+        'cntVT',
+        'cntHT',
+        // Registers
+        'regFV',
+        'regV',
+        'regH',
+        'regVT',
+        'regHT',
+        'regFH',
+        'regS',
+        // VRAM addr
+        'vramAddress',
+        'vramTmpAddress',
+        // Control/Status registers
+        'f_nmiOnVblank',
+        'f_spriteSize',
+        'f_bgPatternTable',
+        'f_spPatternTable',
+        'f_addrInc',
+        'f_nTblAddress',
+        'f_color',
+        'f_spVisibility',
+        'f_bgVisibility',
+        'f_spClipping',
+        'f_bgClipping',
+        'f_dispType',
+        // VRAM I/O
+        'vramBufferedReadValue',
+        'firstWrite',
+        // Mirroring
+        'currentMirroring',
+        'vramMirrorTable',
+        'ntable1',
+        // SPR-RAM I/O
+        'sramAddress',
+        // Sprites. Most sprite data is rebuilt from spriteMem
+        'hitSpr0',
+        // Palettes
+        'sprPalette',
+        'imgPalette',
+        // Rendering progression
+        'curX',
+        'scanline',
+        'lastRenderedScanline',
+        'curNt',
+        'scantile',
+        // Used during rendering
+        'attrib',
+        'buffer',
+        'bgbuffer',
+        'pixrendered',
+        // Misc
+        'requestEndFrame',
+        'nmiOk',
+        'dummyCycleToggle',
+        'nmiCounter',
+        'validTileData',
+        'scanlineAlreadyRendered',
+    ];
+
+    /**
+     * @param {import('../NES').NES} nes
+     */
     constructor(nes)
     {
         this.nes = nes;
@@ -84,80 +160,6 @@ export class PPU
 
         this.reset();
     }
-
-    // Status flags:
-    STATUS_VRAMWRITE = 4;
-    STATUS_SLSPRITECOUNT = 5;
-    STATUS_SPRITE0HIT = 6;
-    STATUS_VBLANK = 7;
-
-    JSON_PROPERTIES = [
-        // Memory
-        'vramMem',
-        'spriteMem',
-        // Counters
-        'cntFV',
-        'cntV',
-        'cntH',
-        'cntVT',
-        'cntHT',
-        // Registers
-        'regFV',
-        'regV',
-        'regH',
-        'regVT',
-        'regHT',
-        'regFH',
-        'regS',
-        // VRAM addr
-        'vramAddress',
-        'vramTmpAddress',
-        // Control/Status registers
-        'f_nmiOnVblank',
-        'f_spriteSize',
-        'f_bgPatternTable',
-        'f_spPatternTable',
-        'f_addrInc',
-        'f_nTblAddress',
-        'f_color',
-        'f_spVisibility',
-        'f_bgVisibility',
-        'f_spClipping',
-        'f_bgClipping',
-        'f_dispType',
-        // VRAM I/O
-        'vramBufferedReadValue',
-        'firstWrite',
-        // Mirroring
-        'currentMirroring',
-        'vramMirrorTable',
-        'ntable1',
-        // SPR-RAM I/O
-        'sramAddress',
-        // Sprites. Most sprite data is rebuilt from spriteMem
-        'hitSpr0',
-        // Palettes
-        'sprPalette',
-        'imgPalette',
-        // Rendering progression
-        'curX',
-        'scanline',
-        'lastRenderedScanline',
-        'curNt',
-        'scantile',
-        // Used during rendering
-        'attrib',
-        'buffer',
-        'bgbuffer',
-        'pixrendered',
-        // Misc
-        'requestEndFrame',
-        'nmiOk',
-        'dummyCycleToggle',
-        'nmiCounter',
-        'validTileData',
-        'scanlineAlreadyRendered',
-    ];
 
     reset()
     {

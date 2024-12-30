@@ -1,8 +1,42 @@
-import { toJSON, fromJSON } from './utils';
+import { fromJSON, toJSON } from '../utils';
 import { OpData } from './OpData';
 
 export class CPU
 {
+    // IRQ Types
+    IRQ_NORMAL = 0;
+    IRQ_NMI = 1;
+    IRQ_RESET = 2;
+    JSON_PROPERTIES = [
+        'mem',
+        'cyclesToHalt',
+        'irqRequested',
+        'irqType',
+        // Registers
+        'REG_ACC',
+        'REG_X',
+        'REG_Y',
+        'REG_SP',
+        'REG_PC',
+        'REG_PC_NEW',
+        'REG_STATUS',
+        // Status
+        'F_CARRY',
+        'F_DECIMAL',
+        'F_INTERRUPT',
+        'F_INTERRUPT_NEW',
+        'F_OVERFLOW',
+        'F_SIGN',
+        'F_ZERO',
+        'F_NOTUSED',
+        'F_NOTUSED_NEW',
+        'F_BRK',
+        'F_BRK_NEW',
+    ];
+
+    /**
+     * @param {import('../NES').NES} nes
+     */
     constructor(nes)
     {
         this.nes = nes;
@@ -35,11 +69,6 @@ export class CPU
 
         this.reset();
     }
-
-    // IRQ Types
-    IRQ_NORMAL = 0;
-    IRQ_NMI = 1;
-    IRQ_RESET = 2;
 
     reset()
     {
@@ -1394,33 +1423,6 @@ export class CPU
         this.F_OVERFLOW = (st >> 6) & 1;
         this.F_SIGN = (st >> 7) & 1;
     }
-
-    JSON_PROPERTIES = [
-        'mem',
-        'cyclesToHalt',
-        'irqRequested',
-        'irqType',
-        // Registers
-        'REG_ACC',
-        'REG_X',
-        'REG_Y',
-        'REG_SP',
-        'REG_PC',
-        'REG_PC_NEW',
-        'REG_STATUS',
-        // Status
-        'F_CARRY',
-        'F_DECIMAL',
-        'F_INTERRUPT',
-        'F_INTERRUPT_NEW',
-        'F_OVERFLOW',
-        'F_SIGN',
-        'F_ZERO',
-        'F_NOTUSED',
-        'F_NOTUSED_NEW',
-        'F_BRK',
-        'F_BRK_NEW',
-    ];
 
     toJSON()
     {

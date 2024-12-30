@@ -9,18 +9,21 @@ export class Controller
     static BUTTON_LEFT = 6;
     static BUTTON_RIGHT = 7;
 
-    constructor() {
+    constructor()
+    {
         this.state = new Array(8);
         for (var i = 0; i < this.state.length; i++) {
             this.state[i] = 0x40;
         }
     }
 
-    buttonDown(key) {
+    buttonDown(key)
+    {
         this.state[key] = 0x41;
     }
 
-    buttonUp(key) {
+    buttonUp(key)
+    {
         this.state[key] = 0x40;
     }
 }

@@ -1,4 +1,4 @@
-import { toJSON, fromJSON } from './utils';
+import { fromJSON, toJSON } from '../utils';
 import { ChannelDM } from './ChannelDM';
 import { ChannelNoise } from './ChannelNoise';
 import { ChannelSquare } from './ChannelSquare';
@@ -55,6 +55,9 @@ export class PAPU
         'panning',
     ];
 
+    /**
+     * @param {import('../NES').NES} nes
+     */
     constructor(nes)
     {
         this.nes = nes;
