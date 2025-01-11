@@ -15,6 +15,7 @@ export default defineConfig({
         // https://vitepress.dev/reference/default-theme-config
         nav: [
             {text: '首页', link: '/'},
+            {text: '帖子', link: '/posts'},
             {text: '示例', link: '/markdown-examples'},
         ],
 
@@ -22,10 +23,8 @@ export default defineConfig({
             {
                 text: '示例',
                 items: [
-                    {text: 'js数组访问元素过程', link: '/array-get-element-process'},
                     {text: 'Markdown 示例', link: '/markdown-examples'},
                     {text: '运行时 API 示例', link: '/api-examples'},
-                    {text: '学习使用Github actions', link: '/learn-github-actions'},
                 ],
             },
         ],

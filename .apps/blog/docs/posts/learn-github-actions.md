@@ -1,3 +1,7 @@
+---
+title: 学习使用 github actions
+---
+
 ## 学习使用 Github actions 自动部署静态网页。
 
 在`.github/workflows`目录下定义`.yml`文件，即可自动执行逻辑。写本文的时候，已经测试可以。
