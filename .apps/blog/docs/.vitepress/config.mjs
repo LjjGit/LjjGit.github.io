@@ -1,4 +1,28 @@
-import { defineConfig } from 'vitepress';
+import { createContentLoader, defineConfig } from 'vitepress';
+
+const sidebar = [];
+
+let generatePostLinkToSidebar = () => {
+    generatePostLinkToSidebar = null;
+    setTimeout(() => {
+        createContentLoader('posts/*.md').load().then((data) => {
+            const postNav = {
+                text: '帖子',
+                collapsed: false,
+                items: [],
+            };
+
+            sidebar.push(postNav);
+
+            for (const item of data) {
+                postNav.items.push({
+                    text: item.frontmatter.title,
+                    link: item.url,
+                });
+            }
+        });
+    });
+};
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -11,26 +35,23 @@ export default defineConfig({
             lang: 'zh',
         },
     },
-    themeConfig: {
+    themeConfig: new Proxy({
         // https://vitepress.dev/reference/default-theme-config
-        nav: [
-            {text: '首页', link: '/'},
-            {text: '帖子', link: '/posts'},
-            {text: '示例', link: '/markdown-examples'},
-        ],
+        // nav: [
+        //     {text: '首页', link: '/'},
+        // ],
 
-        sidebar: [
-            {
-                text: '示例',
-                items: [
-                    {text: 'Markdown 示例', link: '/markdown-examples'},
-                    {text: '运行时 API 示例', link: '/api-examples'},
-                ],
-            },
-        ],
+        sidebar,
 
         // socialLinks: [
         //   { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
         // ]
-    },
+    }, {
+        get(target, p, receiver)
+        {
+            generatePostLinkToSidebar?.();
+
+            return target[p];
+        },
+    }),
 });

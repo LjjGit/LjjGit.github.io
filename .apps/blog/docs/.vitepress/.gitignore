@@ -1,3 +1,4 @@
 *
-!.gitignore
-!config.mjs
+!/.gitignore
+!/config.mjs
+!/theme/
