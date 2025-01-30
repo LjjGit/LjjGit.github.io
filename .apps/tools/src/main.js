@@ -8,6 +8,7 @@ const router = createRouter({
     routes: [
         { path: '/', component: () => import('./views/Home.vue') },
         { path: '/calc', component: () => import('./views/Calc.vue') },
+        { path: '/file-byte', component: () => import('./views/FileByte.vue') },
     ],
 });
 
