@@ -9,6 +9,7 @@ const router = createRouter({
         { path: '/', component: () => import('./views/Home.vue') },
         { path: '/calc', component: () => import('./views/Calc.vue') },
         { path: '/file-byte', component: () => import('./views/FileByte.vue') },
+        { path: '/nes-color', component: () => import('./views/NesColor.vue') },
     ],
 });
 
