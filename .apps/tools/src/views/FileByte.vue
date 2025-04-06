@@ -4,15 +4,24 @@
         <div class="show-box">
             <div class="show-item-box">
                 <div class="show-text b64">{{ b64 }}</div>
-                <div><button class="cp-btn" v-if="b64" @click="handleCopy(b64)">复制 {{ b64.length }} Bytes</button></div>
+                <div class="btn-box">
+                    <button v-if="b64" @click="handleCopy(b64)">复制 {{ b64.length }} Bytes</button>
+                    <button v-if="b64" @click="download(b64)">下载</button>
+                </div>
             </div>
             <div class="show-item-box">
                 <div class="show-text">{{ num }}</div>
-                <div><button class="cp-btn" v-if="num" @click="handleCopy(num)">复制</button></div>
+                <div class="btn-box">
+                    <button v-if="num" @click="handleCopy(num)">复制</button>
+                    <button v-if="num" @click="download(num)">下载</button>
+                </div>
             </div>
             <div class="show-item-box">
                 <div class="show-text">{{ hex }}</div>
-                <div><button class="cp-btn" v-if="hex" @click="handleCopy(hex)">复制</button></div>
+                <div class="btn-box">
+                    <button v-if="hex" @click="handleCopy(hex)">复制</button>
+                    <button v-if="hex" @click="download(hex)">下载</button>
+                </div>
             </div>
         </div>
     </div>
@@ -44,6 +53,14 @@ const handleCopy = data => {
     navigator.clipboard.writeText(data).then(() => {
         alert('复制成功');
     });
+};
+const download = data => {
+    const file = new File([data], 'FileByteText.txt');
+    const a = document.createElement('a');
+    a.download = file.name;
+    a.href = URL.createObjectURL(file);
+    a.click();
+    a.remove();
 };
 </script>
 
@@ -81,8 +98,8 @@ const handleCopy = data => {
 .show-text.b64 {
     word-break: break-all;
 }
-.cp-btn {
-    display: block;
-    margin: 0 auto;
+.btn-box {
+    display: flex;
+    justify-content: space-evenly;
 }
 </style>
