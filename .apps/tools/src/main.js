@@ -11,6 +11,7 @@ const router = createRouter({
         { path: '/file-byte', component: () => import('./views/FileByte.vue') },
         { path: '/nes-color', component: () => import('./views/NesColor.vue') },
         { path: '/pdf-viewer', component: () => import('./views/PdfViewer.vue') },
+        { path: '/pdf-to-img', component: () => import('./views/PdfToImg.vue') },
     ],
 });
 

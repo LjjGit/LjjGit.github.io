@@ -5,5 +5,6 @@
         <li><RouterLink to="/file-byte">文件字节 File Byte</RouterLink></li>
         <li><RouterLink to="/nes-color">Nes Color</RouterLink></li>
         <li><RouterLink to="/pdf-viewer">PDF Viewer</RouterLink></li>
+        <li><RouterLink to="/pdf-to-img">PDF to IMG</RouterLink></li>
     </ol>
 </template>
