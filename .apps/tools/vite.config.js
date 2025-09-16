@@ -12,6 +12,10 @@ export default defineConfig({
             minify: true,
         }),
         AutoImport({
+            imports: [
+                // presets
+                'vue',
+            ],
             resolvers: [
                 ElementPlusResolver(),
             ],
