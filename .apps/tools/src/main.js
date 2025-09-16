@@ -10,6 +10,7 @@ const router = createRouter({
         { path: '/calc', component: () => import('./views/Calc.vue') },
         { path: '/file-byte', component: () => import('./views/FileByte.vue') },
         { path: '/nes-color', component: () => import('./views/NesColor.vue') },
+        { path: '/pdf-viewer', component: () => import('./views/PdfViewer.vue') },
     ],
 });
 
