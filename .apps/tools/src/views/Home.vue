@@ -6,5 +6,6 @@
         <li><RouterLink to="/nes-color">Nes Color</RouterLink></li>
         <li><RouterLink to="/pdf-viewer">PDF Viewer</RouterLink></li>
         <li><RouterLink to="/pdf-to-img">PDF to IMG</RouterLink></li>
+        <li><RouterLink to="/get-pdf-img">提取pdf图片</RouterLink></li>
     </ol>
 </template>

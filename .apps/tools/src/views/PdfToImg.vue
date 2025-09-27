@@ -92,6 +92,15 @@ function fileChange(e)
                         const img = document.createElement('img');
                         img.src = cv.toDataURL('image/jpeg');
                         imgs.value.append(img);
+
+                        // const body = new FormData();
+                        // body.append('name', page.pageNumber + '.jpg');
+                        // body.append('file', img.src.replace('data:image/jpeg;base64,', ''));
+                        // fetch('http://localhost:1111/a.php', {
+                        //     method: 'post',
+                        //     body,
+                        // });
+
                         resolve();
 
 
