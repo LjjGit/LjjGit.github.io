@@ -1,4 +1,4 @@
 .idea
 node_modules
-/*.test.js
-/*.test.mjs
+/*.local.js
+/*.local.mjs
