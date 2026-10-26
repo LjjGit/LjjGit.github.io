@@ -13,6 +13,7 @@ const router = createRouter({
         { path: '/pdf-viewer', component: () => import('./views/PdfViewer.vue') },
         { path: '/pdf-to-img', component: () => import('./views/PdfToImg.vue') },
         { path: '/get-pdf-img', component: () => import('./views/GetPdfImg.vue') },
+        { path: '/gen-random-canvas', component: () => import('./views/GenRandomCanvas.vue') },
     ],
 });
 

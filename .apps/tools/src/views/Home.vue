@@ -7,5 +7,6 @@
         <li><RouterLink to="/pdf-viewer">PDF Viewer</RouterLink></li>
         <li><RouterLink to="/pdf-to-img">PDF to IMG</RouterLink></li>
         <li><RouterLink to="/get-pdf-img">提取pdf图片</RouterLink></li>
+        <li><RouterLink to="/gen-random-canvas">生成随机图片</RouterLink></li>
     </ol>
 </template>
