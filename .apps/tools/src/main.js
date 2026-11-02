@@ -14,6 +14,7 @@ const router = createRouter({
         { path: '/pdf-to-img', component: () => import('./views/PdfToImg.vue') },
         { path: '/get-pdf-img', component: () => import('./views/GetPdfImg.vue') },
         { path: '/gen-random-canvas', component: () => import('./views/GenRandomCanvas.vue') },
+        { path: '/math-function', component: () => import('./views/MathFunction.vue') },
     ],
 });
 
